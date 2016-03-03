@@ -5,6 +5,11 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sark - Hardware Component", "Sark - Hardware Component\Sark - Hardware Component.csproj", "{387E664E-3C84-4E1F-B4F9-A53856E7741E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4E6B4A88-56E6-4663-BF31-ECE7A4C2A6ED}"
+	ProjectSection(SolutionItems) = preProject
+		mcp.CS = mcp.CS
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
