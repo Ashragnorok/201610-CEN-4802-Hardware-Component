@@ -10,6 +10,7 @@ namespace Sark___Hardware_Component
     {
         static void Main(string[] args)
         {
+            Elevator elwood = new Elevator();
 
         }
     }
