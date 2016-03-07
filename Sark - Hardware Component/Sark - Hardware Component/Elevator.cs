@@ -124,9 +124,9 @@ namespace Sark___Hardware_Component
         public override string ToString()
         {
             string s = "";
-            s = "Name: " + Name + "\nInService: " + InService + "\nCurrentFloor: " + CurrentFloor
-            + "\nNextFloor: " + NextFloor + "\nLastFloor: " + LastFloor
-            + "\nDoorState: " + showDoorState() + "\nDoorClear: " + DoorClear;
+            s = "Name: " + Name + "\r\nInService: " + InService + "\r\nCurrentFloor: " + CurrentFloor
+            + "\r\nNextFloor: " + NextFloor + "\r\nLastFloor: " + LastFloor
+            + "\r\nDoorState: " + showDoorState() + "\r\nDoorClear: " + DoorClear;
             return s;
         }
 

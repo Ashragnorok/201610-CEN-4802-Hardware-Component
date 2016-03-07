@@ -42,9 +42,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 231);
+            this.button1.Location = new System.Drawing.Point(12, 225);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(115, 30);
+            this.button1.Size = new System.Drawing.Size(126, 36);
             this.button1.TabIndex = 0;
             this.button1.Text = "Service Toggle";
             this.button1.UseVisualStyleBackColor = true;
@@ -105,6 +105,12 @@
             // cbxElevatorFloor
             // 
             this.cbxElevatorFloor.FormattingEnabled = true;
+            this.cbxElevatorFloor.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4"});
             this.cbxElevatorFloor.Location = new System.Drawing.Point(268, 44);
             this.cbxElevatorFloor.Name = "cbxElevatorFloor";
             this.cbxElevatorFloor.Size = new System.Drawing.Size(121, 24);

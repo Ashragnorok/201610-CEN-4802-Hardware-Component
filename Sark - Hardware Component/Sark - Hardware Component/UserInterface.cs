@@ -21,8 +21,10 @@ namespace Sark___Hardware_Component
         {
             //
             Elevator ElevatorAlpha = new Elevator("Elevator Alpha", 0);
+
             lblElevatorName.Text = ElevatorAlpha.getName();
             tbxConsole.Text = ElevatorAlpha.ToString();
+            cbxElevatorFloor.SelectedIndex = 0;
         }
 
         private void btnExit_Click(object sender, EventArgs e)
