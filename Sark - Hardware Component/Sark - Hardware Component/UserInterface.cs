@@ -20,9 +20,14 @@ namespace Sark___Hardware_Component
         private void UserInterface_Load(object sender, EventArgs e)
         {
             //
-            Elevator ElevatorAlpha = new Elevator();
+            Elevator ElevatorAlpha = new Elevator("Elevator Alpha", 0);
+            lblElevatorName.Text = ElevatorAlpha.getName();
+            tbxConsole.Text = ElevatorAlpha.ToString();
         }
 
-
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
