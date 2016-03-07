@@ -136,16 +136,16 @@ namespace Sark___Hardware_Component
             switch (doorState)
             {
                 case "closed":
-                    DoorState = 0;
+                    setDoorState(0);
                     break;
                 case "closing":
-                    DoorState = 3;
+                    setDoorState(3);
                     break;
                 case "opened":
-                    DoorState = 2;
+                    setDoorState(2);
                     break;
                 case "opening":
-                    DoorState = 1;
+                    setDoorState(1);
                     break;
                 default:
                     break;
@@ -168,19 +168,20 @@ namespace Sark___Hardware_Component
 
         public async void gotoFloor(int nextFloor)
         {
-            if (getDoorState() == 0)
+            if (getDoorState() == 0 && nextFloor <= 5)
             {
                 NextFloor = nextFloor;
                 await Task.Delay(ETA());
                 openElevator();
                 arrivedAtFloor();
+                await Task.Delay(100);
             }
 
         }
 
         public void arrivedAtFloor()
         {
-            Console.WriteLine("you have arrived");
+            Console.WriteLine("\nyou have arrived");
             LastFloor = CurrentFloor;
             CurrentFloor = (int)NextFloor;
             NextFloor = null;
@@ -190,7 +191,7 @@ namespace Sark___Hardware_Component
         {
             int t = 0;
             t = (int)NextFloor - CurrentFloor;
-            t *= 7000;
+            t *= 100;
             if (t < 0)
             {
                 t *= -1;
@@ -201,15 +202,15 @@ namespace Sark___Hardware_Component
         //this tells you if the elevator is headed up or down. 
         public string getElevatorState()
         {
-            string s = "Arrived_At_Floor";
+            string s = "\nArrived_At_Floor";
             if (NextFloor != null)
             {
                 if ((CurrentFloor - (int)NextFloor) < 0)
-                { s = "Going_UP"; }
+                { s = "\nGoing_UP"; }
                 if ((CurrentFloor - (int)NextFloor) > 0)
-                { s = "Going_DOWN"; }
+                { s = "\nGoing_DOWN"; }
                 if ((CurrentFloor - (int)NextFloor) == 0)
-                { s = "you're already there..."; }
+                { s = "\nyou're already there..."; }
             }
             return s;
         }
@@ -220,10 +221,10 @@ namespace Sark___Hardware_Component
             if (DoorState == 0 || DoorClear == true)
             {
                 DoorState = 1;
-                Console.WriteLine("the door is opening. ");
-                await Task.Delay(3000);
+                Console.WriteLine("\nthe door is opening. ");
+                await Task.Delay(500);
                 DoorState = 2;
-                Console.WriteLine("the door is opened. ");
+                Console.WriteLine("\nthe door is opened. ");
             }
         }
 
@@ -232,10 +233,10 @@ namespace Sark___Hardware_Component
             if (DoorState == 2 && DoorClear == true)
             {
                 DoorState = 3;
-                Console.WriteLine("the door is closing. ");
-                await Task.Delay(3000);
+                Console.WriteLine("\nthe door is closing. ");
+                await Task.Delay(500);
                 DoorState = 0;
-                Console.WriteLine("the door is closed. ");
+                Console.WriteLine("\nthe door is closed. ");
             }
         }
     }

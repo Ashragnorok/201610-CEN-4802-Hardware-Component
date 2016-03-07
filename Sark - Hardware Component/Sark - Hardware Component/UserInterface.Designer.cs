@@ -57,6 +57,7 @@
             this.btnGroundFloor.TabIndex = 1;
             this.btnGroundFloor.Text = "Go To Ground Floor";
             this.btnGroundFloor.UseVisualStyleBackColor = true;
+            this.btnGroundFloor.Click += new System.EventHandler(this.btnGroundFloor_Click);
             // 
             // btnExit
             // 
@@ -106,11 +107,11 @@
             // 
             this.cbxElevatorFloor.FormattingEnabled = true;
             this.cbxElevatorFloor.Items.AddRange(new object[] {
-            "0",
             "1",
             "2",
             "3",
-            "4"});
+            "4",
+            "5"});
             this.cbxElevatorFloor.Location = new System.Drawing.Point(268, 44);
             this.cbxElevatorFloor.Name = "cbxElevatorFloor";
             this.cbxElevatorFloor.Size = new System.Drawing.Size(121, 24);
@@ -124,6 +125,7 @@
             this.btnElevatorFloor.TabIndex = 8;
             this.btnElevatorFloor.Text = "Go To Floor";
             this.btnElevatorFloor.UseVisualStyleBackColor = true;
+            this.btnElevatorFloor.Click += new System.EventHandler(this.btnElevatorFloor_Click);
             // 
             // lblActionProgress
             // 

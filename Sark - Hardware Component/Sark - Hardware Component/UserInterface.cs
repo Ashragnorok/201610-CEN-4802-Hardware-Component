@@ -12,6 +12,8 @@ namespace Sark___Hardware_Component
 {
     public partial class UserInterface : Form
     {
+        Elevator ElevatorAlpha = new Elevator("Elevator Alpha", 0);
+
         public UserInterface()
         {
             InitializeComponent();
@@ -20,16 +22,30 @@ namespace Sark___Hardware_Component
         private void UserInterface_Load(object sender, EventArgs e)
         {
             //
-            Elevator ElevatorAlpha = new Elevator("Elevator Alpha", 0);
+            
 
             lblElevatorName.Text = ElevatorAlpha.getName();
             tbxConsole.Text = ElevatorAlpha.ToString();
             cbxElevatorFloor.SelectedIndex = 0;
+
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void btnElevatorFloor_Click(object sender, EventArgs e)
+        {
+            ElevatorAlpha.setDoorState("closed");
+            tbxConsole.Clear();
+            ElevatorAlpha.gotoFloor(int.Parse(cbxElevatorFloor.SelectedItem.ToString()));
+            tbxConsole.Text = ElevatorAlpha.ToString();
+        }
+
+        private void btnGroundFloor_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }
