@@ -18,7 +18,7 @@ namespace Sark___Hardware_Component
         //default contructor
         public Elevator()
         {
-            Name = "Elwood the Elevator";
+            Name = "Debug Elevator";
             InService = true;
             MaxCapacity = 6;
             NextFloor = null;

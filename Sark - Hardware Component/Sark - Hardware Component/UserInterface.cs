@@ -16,5 +16,13 @@ namespace Sark___Hardware_Component
         {
             InitializeComponent();
         }
+
+        private void UserInterface_Load(object sender, EventArgs e)
+        {
+            //
+            Elevator ElevatorAlpha = new Elevator();
+        }
+
+
     }
 }

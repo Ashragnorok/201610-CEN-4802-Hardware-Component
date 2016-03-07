@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,8 +11,10 @@ namespace Sark___Hardware_Component
     {
         static void Main(string[] args)
         {
-            Elevator elwood = new Elevator();
+            
+            UserInterface testForm = new UserInterface();
 
+            testForm.ShowDialog();
         }
     }
 }
