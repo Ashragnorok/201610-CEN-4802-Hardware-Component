@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Sark Class Diagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="UserInterface.resx">
