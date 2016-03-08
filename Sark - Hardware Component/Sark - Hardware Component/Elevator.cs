@@ -15,31 +15,44 @@ namespace Sark___Hardware_Component
         private Nullable<int> next_Floor, last_Floor;
         private int door_State;
         private bool door_Clear, in_Service, _Occupied;
-        private double 
 
         public Elevator(){
-            _Name = "De-Fault";
-            in_Service = true;
-            current_Capacity = 0;
-            next_Floor = null;
-            last_Floor = null;
-            door_State = 0;
-            door_Clear = false;
+            Name = "De-Fault";
+            inService = true;
+            currentCapacity = 0;
+            currentFloor = 1;
+            nextFloor = null;
+            lastFloor = null;
+            doorState = 0;
+            doorClear = false;
         }
 
-        public Elevator()
+        public Elevator(string name, int currentfloor)
         {
-            throw new System.NotImplementedException();
+            Name = name;
+            inService = true;
+            currentCapacity = 0;
+            currentFloor = currentfloor;
+            nextFloor = null;
+            lastFloor = null;
+            doorState = 0;
+            doorClear = false;
         }
 
-        public Elevator()
+        public Elevator(string name)
         {
-            throw new System.NotImplementedException();
+            Name = name;
+            inService = true;
+            currentCapacity = 0;
+            currentFloor = 1;
+            nextFloor = null;
+            lastFloor = null;
+            doorState = 0;
+            doorClear = false;
         }
 
         public double maxCapacity {
             get { return max_Capacity;}
-            set { max_Capacity = value;}
         }
 
         public string Name {
@@ -87,6 +100,10 @@ namespace Sark___Hardware_Component
             set { current_Capacity = value ;}
         }
 
+        public void MoveToFloor(int nextfloor)
+        {
+            
+        }
     }
     /// <>
     /// this is the end of the elevator class
