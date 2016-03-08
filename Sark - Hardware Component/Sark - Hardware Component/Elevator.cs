@@ -8,13 +8,34 @@ namespace Sark___Hardware_Component
 {
     public class Elevator
     {
-        private double max_Capacity;
+        private const double max_Capacity = 2000;
+        private double current_Capacity;
         private string _Name;
         private int current_Floor;
         private Nullable<int> next_Floor, last_Floor;
         private int door_State;
         private bool door_Clear, in_Service, _Occupied;
-        private double current_Capacity;
+        private double 
+
+        public Elevator(){
+            _Name = "De-Fault";
+            in_Service = true;
+            current_Capacity = 0;
+            next_Floor = null;
+            last_Floor = null;
+            door_State = 0;
+            door_Clear = false;
+        }
+
+        public Elevator()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Elevator()
+        {
+            throw new System.NotImplementedException();
+        }
 
         public double maxCapacity {
             get { return max_Capacity;}
