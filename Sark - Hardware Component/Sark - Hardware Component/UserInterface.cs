@@ -22,9 +22,9 @@ namespace Sark___Hardware_Component
         private void UserInterface_Load(object sender, EventArgs e)
         {
             //
-            
 
-            lblElevatorName.Text = ElevatorAlpha.getName();
+
+            lblElevatorName.Text = ElevatorAlpha.Name;
             tbxConsole.Text = ElevatorAlpha.ToString();
             cbxElevatorFloor.SelectedIndex = 0;
 
@@ -37,15 +37,26 @@ namespace Sark___Hardware_Component
 
         private void btnElevatorFloor_Click(object sender, EventArgs e)
         {
-            ElevatorAlpha.setDoorState("closed");
             tbxConsole.Clear();
-            ElevatorAlpha.gotoFloor(int.Parse(cbxElevatorFloor.SelectedItem.ToString()));
-            tbxConsole.Text = ElevatorAlpha.ToString();
+            ElevatorAlpha.MoveToFloor(int.Parse(cbxElevatorFloor.SelectedItem.ToString()));
+            ConsoleReadout();
+            //tbxConsole.Text = ElevatorAlpha.ToString();
         }
 
         private void btnGroundFloor_Click(object sender, EventArgs e)
         {
             
+        }
+
+        private void ConsoleReadout ()
+        {
+            tbxConsole.Text = "Elevator: " + ElevatorAlpha.Name +
+                "\nLast Floor: " + ElevatorAlpha.lastFloor +
+                "\nCurrent Floor: " + ElevatorAlpha.nextFloor +
+                "\nDoorState" + ElevatorAlpha.doorState +
+                "\nOccupied: " + ElevatorAlpha.Occupied +
+                "\nWeight: " + ElevatorAlpha.currentCapacity;
+
         }
     }
 }

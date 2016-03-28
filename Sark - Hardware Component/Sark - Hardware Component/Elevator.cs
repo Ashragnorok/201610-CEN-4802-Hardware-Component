@@ -103,7 +103,48 @@ namespace Sark___Hardware_Component
         public void MoveToFloor(int nextfloor)
         {
             
+            this.lastFloor = this.currentFloor;
+            this.currentFloor = nextfloor;
         }
+
+        //Door State will slide from 0 - 5
+        //Where:
+        //0 = Locked
+        //1 = Closed
+        //2 = Closing
+        //3 = Opening
+        //4 = Open
+        //5 = Failed
+        public void DoorOperator(int State)
+        {
+            switch (State)
+            {
+                case 0: // Locked
+
+                    break;
+                case 1: // Closed
+
+                    break;
+                case 2: // Closing
+
+                    break;
+                case 3: // Opening
+
+                    break;
+                case 4: // Open
+
+                    break;
+                case 5: // Failed
+
+                    break;
+                default: // 
+
+                    break;
+            }
+        }
+
+
+
     }
     /// <>
     /// this is the end of the elevator class

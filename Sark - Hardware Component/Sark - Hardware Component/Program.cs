@@ -15,7 +15,7 @@ namespace Sark___Hardware_Component
             UserInterface testForm = new UserInterface();
             testForm.ShowDialog();
 
-            }
+            
         }
     }
 }
