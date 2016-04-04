@@ -37,7 +37,6 @@ namespace Sark___Hardware_Component
 
         private void btnElevatorFloor_Click(object sender, EventArgs e)
         {
-            tbxConsole.Clear();
             ElevatorAlpha.MoveToFloor(int.Parse(cbxElevatorFloor.SelectedItem.ToString()));
             ConsoleReadout();
             //tbxConsole.Text = ElevatorAlpha.ToString();
@@ -45,18 +44,25 @@ namespace Sark___Hardware_Component
 
         private void btnGroundFloor_Click(object sender, EventArgs e)
         {
-            
+            ElevatorAlpha.MoveToFloor(0);
+            ConsoleReadout();
         }
 
         private void ConsoleReadout ()
         {
+            tbxConsole.Clear();
             tbxConsole.Text = "Elevator: " + ElevatorAlpha.Name +
-                "\nLast Floor: " + ElevatorAlpha.lastFloor +
-                "\nCurrent Floor: " + ElevatorAlpha.nextFloor +
-                "\nDoorState" + ElevatorAlpha.doorState +
-                "\nOccupied: " + ElevatorAlpha.Occupied +
-                "\nWeight: " + ElevatorAlpha.currentCapacity;
+                "\nLast Floor: " + ElevatorAlpha.lastFloor + "\r\n" +
+                "\nCurrent Floor: " + ElevatorAlpha.nextFloor + "\r\n" +
+                "\nDoorState" + ElevatorAlpha.doorState + "\r\n" +
+                "\nOccupied: " + ElevatorAlpha.Occupied + "\r\n" +
+                "\nWeight: " + ElevatorAlpha.currentCapacity + "\r\n";
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ElevatorAlpha.ServiceToggle();
         }
     }
 }

@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
-
+//
 namespace Sark___Hardware_Component
 {
     public class Elevator
@@ -102,9 +103,15 @@ namespace Sark___Hardware_Component
 
         public void MoveToFloor(int nextfloor)
         {
-            
-            this.lastFloor = this.currentFloor;
-            this.currentFloor = nextfloor;
+            if (inService == false)
+            {
+                Console.WriteLine("Elevator not in Service");
+            }
+            else
+            {
+                this.lastFloor = this.currentFloor;
+                this.currentFloor = nextfloor;
+            }
         }
 
         //Door State will slide from 0 - 3
@@ -118,36 +125,57 @@ namespace Sark___Hardware_Component
             switch (State)
             {
                 case 0: // Locked 
+                    Timer(1);
                     Console.WriteLine("Door is locked.");
                     doorState = State;
                     break;
 
                 case 1: // Closed
-
+                    Timer(2);
                     Console.WriteLine("Door is closed.");
                     doorState = State;
                     break;
 
                 case 2: // Open
+                    Timer(2);
                     Console.WriteLine("Door Is Open.");
                     doorState = State;
                     break;
 
                 case 3: // Failed
+                    Timer(10);
                     Console.WriteLine("Door has Failed");
                     inService = false;
                     doorState = State;
                     break;
 
                 default: // 
+                    Timer(0);
                     Console.WriteLine("Critical Logic Error Occured, Closing Door");
                     DoorState(1);
                     MoveToFloor(0);
+                    ServiceToggle();
                     break;
             }
             return doorState;
         }
 
+        public void ServiceToggle()
+        {
+            if(inService == true)
+            {
+                inService = false;
+            }
+            else
+            {
+                inService = true;
+            }
+        }
+
+        private void Timer(int multiplier)
+        {
+            Thread.Sleep(multiplier * 100);
+        }
 
     }
     /// <>
