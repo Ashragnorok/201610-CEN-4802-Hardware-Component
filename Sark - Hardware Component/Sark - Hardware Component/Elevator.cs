@@ -107,42 +107,46 @@ namespace Sark___Hardware_Component
             this.currentFloor = nextfloor;
         }
 
-        //Door State will slide from 0 - 5
+        //Door State will slide from 0 - 3
         //Where:
         //0 = Locked
         //1 = Closed
-        //2 = Closing
-        //3 = Opening
-        //4 = Open
-        //5 = Failed
-        public void DoorOperator(int State)
+        //2 = Open
+        //3 = Failed
+        public int DoorState(int State)
         {
             switch (State)
             {
-                case 0: // Locked
-
+                case 0: // Locked 
+                    Console.WriteLine("Door is locked.");
+                    doorState = State;
                     break;
+
                 case 1: // Closed
 
+                    Console.WriteLine("Door is closed.");
+                    doorState = State;
                     break;
-                case 2: // Closing
 
+                case 2: // Open
+                    Console.WriteLine("Door Is Open.");
+                    doorState = State;
                     break;
-                case 3: // Opening
 
+                case 3: // Failed
+                    Console.WriteLine("Door has Failed");
+                    inService = false;
+                    doorState = State;
                     break;
-                case 4: // Open
 
-                    break;
-                case 5: // Failed
-
-                    break;
                 default: // 
-
+                    Console.WriteLine("Critical Logic Error Occured, Closing Door");
+                    DoorState(1);
+                    MoveToFloor(0);
                     break;
             }
+            return doorState;
         }
-
 
 
     }
