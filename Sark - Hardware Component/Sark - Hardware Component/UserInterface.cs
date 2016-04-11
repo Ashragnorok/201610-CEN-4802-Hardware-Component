@@ -12,11 +12,12 @@ namespace Sark___Hardware_Component
 {
     public partial class UserInterface : Form
     {
-        Elevator ElevatorAlpha = new Elevator("Elevator Alpha", 0);
+        Elevator ElevatorAlpha = new Elevator("Sark", 0);
 
         public UserInterface()
         {
             InitializeComponent();
+            ElevatorAlpha.SetProgress += SetProgress;
         }
 
         private void UserInterface_Load(object sender, EventArgs e)
@@ -25,7 +26,7 @@ namespace Sark___Hardware_Component
 
 
             lblElevatorName.Text = ElevatorAlpha.Name;
-            tbxConsole.Text = ElevatorAlpha.ToString();
+            ConsoleReadout();
             cbxElevatorFloor.SelectedIndex = 0;
 
         }
@@ -51,7 +52,8 @@ namespace Sark___Hardware_Component
         private void ConsoleReadout ()
         {
             tbxConsole.Clear();
-            tbxConsole.Text = "Elevator: " + ElevatorAlpha.Name +
+            tbxConsole.Text = "Elevator: " + ElevatorAlpha.Name + "\r\n" +
+                "\nStatus: " + ElevatorAlpha.Status + "\r\n" +
                 "\nLast Floor: " + ElevatorAlpha.lastFloor + "\r\n" +
                 "\nCurrent Floor: " + ElevatorAlpha.nextFloor + "\r\n" +
                 "\nDoorState" + ElevatorAlpha.doorState + "\r\n" +
@@ -63,6 +65,11 @@ namespace Sark___Hardware_Component
         private void button1_Click(object sender, EventArgs e)
         {
             ElevatorAlpha.ServiceToggle();
+        }
+
+        public void SetProgress(int progress)
+        {
+            pbarTimeToComplete.Value = progress;
         }
     }
 }
