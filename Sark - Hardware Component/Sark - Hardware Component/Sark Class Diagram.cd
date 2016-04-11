@@ -2,8 +2,20 @@
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Sark___Hardware_Component.Elevator">
     <Position X="0.5" Y="0.5" Width="3.25" />
+    <NestedTypes>
+      <Delegate Name="Sark___Hardware_Component.Elevator.SetProgressDelegate" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Elevator.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="Sark___Hardware_Component.Elevator.AddInformationDelegate" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Elevator.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>gAAIAkgAkAAAIAAAUEAAICQAAkAAAQBBAAAAAACAAAA=</HashCode>
+      <HashCode>gAAIAkgkkAAAIAQAUECCICQAAkIAAQBBAAAAAACECAA=</HashCode>
       <FileName>Elevator.cs</FileName>
     </TypeIdentifier>
   </Class>

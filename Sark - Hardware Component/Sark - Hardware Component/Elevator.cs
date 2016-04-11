@@ -9,11 +9,18 @@ namespace Sark___Hardware_Component
 {
     public class Elevator
     {
+        //Event delegate for a progress bar
         internal delegate void SetProgressDelegate(int progress);
         internal event SetProgressDelegate SetProgress;
-        
-        private const double max_Capacity = 2000;
-        private double current_Capacity;
+
+        //Event delegate for console information
+        internal delegate void AddInformationDelegate();
+        internal event AddInformationDelegate ConsoleReadout;
+
+        Random rnd = new Random();
+
+        private const int max_Capacity = 2000;
+        private int current_Capacity;
         private string _Name, _Status;
         private int current_Floor;
         private int? next_Floor, last_Floor;
@@ -23,7 +30,7 @@ namespace Sark___Hardware_Component
         public Elevator(){
             Name = "De-Fault";
             inService = true;
-            currentCapacity = 0;
+            currentCapacity = rnd.Next(50, 600);
             currentFloor = 1;
             nextFloor = null;
             lastFloor = null;
@@ -35,7 +42,7 @@ namespace Sark___Hardware_Component
         {
             Name = name;
             inService = true;
-            currentCapacity = 0;
+            currentCapacity = rnd.Next(50, 600);
             currentFloor = currentfloor;
             nextFloor = null;
             lastFloor = null;
@@ -47,7 +54,7 @@ namespace Sark___Hardware_Component
         {
             Name = name;
             inService = true;
-            currentCapacity = 0;
+            currentCapacity = rnd.Next(50, 600);
             currentFloor = 1;
             nextFloor = null;
             lastFloor = null;
@@ -55,7 +62,7 @@ namespace Sark___Hardware_Component
             doorClear = false;
         }
 
-        public double maxCapacity {
+        public int maxCapacity {
             get { return max_Capacity;}
         }
 
@@ -105,29 +112,48 @@ namespace Sark___Hardware_Component
             set { _Occupied = value ;}
         }
 
-        public double currentCapacity {
+        public int currentCapacity {
             get { return current_Capacity; }
             set { current_Capacity = value ;}
         }
 
         public void MoveToFloor(int nextfloor)
         {
+            nextFloor = nextfloor;
             if (inService == false)
             {
                 Status = "Elevator not in Service";
             }
-            else if (currentFloor == nextfloor)
+            else if (currentFloor == nextFloor)
             {
                 Status = "Elevator is already on the correct floor";
             }
             else
             {
-
-                this.lastFloor = this.currentFloor;
-                Status = "Elevator Moving to " + nextFloor.ToString();
-                FloorTime(currentFloor, nextfloor);
-                this.currentFloor = nextfloor;
+                DoorOpenRoutine();
+                ElevatorMove();
+                
             }
+        }
+
+        private void DoorOpenRoutine()
+        {
+
+            Status = "Elevator Door is opening";
+            Timer(4);
+            doorState = 2;
+            Status = "Elevator Door is open";
+
+            // subtract from the elevator
+            currentCapacity =- rnd.Next(50, currentCapacity);
+
+
+            //  add people to the
+            currentCapacity =+ rnd.Next(50, 600);
+
+
+
+
         }
 
         //Door State will slide from 0 - 3
@@ -170,6 +196,7 @@ namespace Sark___Hardware_Component
                     Status = "Critical Logic Error Occured, Closing Door";
                     DoorState(1);
                     MoveToFloor(0);
+                    ConsoleReadout();
                     ServiceToggle();
                     break;
             }
@@ -191,10 +218,12 @@ namespace Sark___Hardware_Component
         private void Timer(int multiplier)
         {
             int interval = 100 / multiplier;
+            int temp = interval;
             for (int i = 0; i < multiplier; i++)
             {
-                System.Threading.Thread.Sleep(100);
-                SetProgress(interval);
+                System.Threading.Thread.Sleep(200);
+                SetProgress(temp);
+                temp = temp + interval;
             }
         }
     
@@ -208,6 +237,15 @@ namespace Sark___Hardware_Component
             int temp = (int)nxtFlr - crrntFlr;
             temp = Math.Abs(temp);
             this.Timer(temp);
+        }
+
+        private void ElevatorMove ()
+        {
+            this.lastFloor = this.currentFloor;
+            Status = "Elevator moving to " + nextFloor.ToString();
+            FloorTime(currentFloor, nextFloor);
+            Status = "Elevator is at floor " + nextFloor.ToString();
+            this.currentFloor = (int)nextFloor;
         }
 
     }
