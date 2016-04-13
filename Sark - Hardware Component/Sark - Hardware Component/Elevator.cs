@@ -13,10 +13,6 @@ namespace Sark___Hardware_Component
         internal delegate void SetProgressDelegate(int progress);
         internal event SetProgressDelegate SetProgress;
 
-        //Event delegate for console information
-        internal delegate void AddInformationDelegate();
-        internal event AddInformationDelegate ConsoleReadout;
-
         Random rnd = new Random();
 
         private const int max_Capacity = 2000;
@@ -119,17 +115,17 @@ namespace Sark___Hardware_Component
 
         public void MoveToFloor(int nextfloor)
         {
-            nextFloor = nextfloor;
             if (inService == false)
             {
                 Status = "Elevator not in Service";
             }
-            else if (currentFloor == nextFloor)
+            else if (currentFloor == nextfloor)
             {
                 Status = "Elevator is already on the correct floor";
             }
             else
             {
+                nextFloor = nextfloor;
                 DoorOpenRoutine();
                 ElevatorMove();
                 
@@ -138,21 +134,29 @@ namespace Sark___Hardware_Component
 
         private void DoorOpenRoutine()
         {
+            if (doorState != 0)
+            {
+                if (currentCapacity >= 0)
+                {
+                    Occupied = true;
+                }
+                else
+                {
+                    Occupied = false;
+                }        
+                
+                Status = "Elevator Door is opening";
+                Timer(4);
+                doorState = 2;
+                Status = "Elevator Door is open";
 
-            Status = "Elevator Door is opening";
-            Timer(4);
-            doorState = 2;
-            Status = "Elevator Door is open";
-
-            // subtract from the elevator
-            currentCapacity =- rnd.Next(50, currentCapacity);
+                // subtract from the elevator
+                currentCapacity = -rnd.Next(50, currentCapacity);
 
 
-            //  add people to the
-            currentCapacity =+ rnd.Next(50, 600);
-
-
-
+                //  add people to the
+                currentCapacity = +rnd.Next(50, 600);
+            }
 
         }
 
@@ -162,41 +166,45 @@ namespace Sark___Hardware_Component
         //1 = Closed
         //2 = Open
         //3 = Failed
-        public int DoorState(int State)
+        private int DoorState(int State)
         {
             switch (State)
             {
                 case 0: // Locked 
-                    Timer(1);
                     Status = "Door is locked.";
+                    Timer(1);
+                    
                     doorState = State;
                     break;
 
                 case 1: // Closed
-                    Timer(2);
                     Status = "Door is closed.";
+                    Timer(2);
+                    
                     doorState = State;
                     break;
 
                 case 2: // Open
-                    Timer(2);
                     Status = "Door Is Open.";
+                    Timer(2);
+                    
                     doorState = State;
                     break;
 
                 case 3: // Failed
-                    Timer(10);
                     Status = "Door has Failed";
+                    Timer(10);
+                    
                     inService = false;
                     doorState = State;
                     break;
 
                 default: // 
-                    Timer(0);
                     Status = "Critical Logic Error Occured, Closing Door";
+                    Timer(0);
+                    
                     DoorState(1);
                     MoveToFloor(0);
-                    ConsoleReadout();
                     ServiceToggle();
                     break;
             }
@@ -221,7 +229,7 @@ namespace Sark___Hardware_Component
             int temp = interval;
             for (int i = 0; i < multiplier; i++)
             {
-                System.Threading.Thread.Sleep(200);
+                System.Threading.Thread.Sleep(500);
                 SetProgress(temp);
                 temp = temp + interval;
             }

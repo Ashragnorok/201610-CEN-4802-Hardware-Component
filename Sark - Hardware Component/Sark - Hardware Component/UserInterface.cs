@@ -14,10 +14,12 @@ namespace Sark___Hardware_Component
     {
         Elevator ElevatorAlpha = new Elevator("Sark", 0);
 
+
         public UserInterface()
         {
             InitializeComponent();
             ElevatorAlpha.SetProgress += SetProgress;
+
 
         }
 
@@ -42,7 +44,6 @@ namespace Sark___Hardware_Component
             pbarTimeToComplete.Value = 0;
             ElevatorAlpha.MoveToFloor(int.Parse(cbxElevatorFloor.SelectedItem.ToString()));
             ConsoleReadout();
-            //tbxConsole.Text = ElevatorAlpha.ToString();
         }
 
         private void btnGroundFloor_Click(object sender, EventArgs e)
@@ -72,6 +73,7 @@ namespace Sark___Hardware_Component
 
         public void SetProgress(int progress)
         {
+            ConsoleReadout();
             pbarTimeToComplete.Value = progress;
         }
     }
