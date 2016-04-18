@@ -14,24 +14,17 @@ namespace Sark___Hardware_Component
     {
         Elevator ElevatorAlpha = new Elevator("Sark", 0);
 
-
         public UserInterface()
         {
             InitializeComponent();
             ElevatorAlpha.SetProgress += SetProgress;
-
-
+            ElevatorAlpha.ConsoleReadout += ConsoleReadout;
         }
 
         private void UserInterface_Load(object sender, EventArgs e)
         {
-            //
-
-
             lblElevatorName.Text = ElevatorAlpha.Name;
-            ConsoleReadout();
             cbxElevatorFloor.SelectedIndex = 0;
-
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -43,27 +36,24 @@ namespace Sark___Hardware_Component
         {
             pbarTimeToComplete.Value = 0;
             ElevatorAlpha.MoveToFloor(int.Parse(cbxElevatorFloor.SelectedItem.ToString()));
-            ConsoleReadout();
         }
 
         private void btnGroundFloor_Click(object sender, EventArgs e)
         {
             pbarTimeToComplete.Value = 0;
             ElevatorAlpha.MoveToFloor(0);
-            ConsoleReadout();
         }
 
-        public void ConsoleReadout ()
+        public void ConsoleReadout (Elevator console)
         {
             tbxConsole.Clear();
-            tbxConsole.Text = "Elevator: " + ElevatorAlpha.Name + "\r\n" +
-                "\nStatus: " + ElevatorAlpha.Status + "\r\n" +
-                "\nLast Floor: " + ElevatorAlpha.lastFloor + "\r\n" +
-                "\nCurrent Floor: " + ElevatorAlpha.nextFloor + "\r\n" +
-                "\nDoorState" + ElevatorAlpha.doorState + "\r\n" +
-                "\nOccupied: " + ElevatorAlpha.Occupied + "\r\n" +
-                "\nWeight: " + ElevatorAlpha.currentCapacity + "\r\n";
-
+            tbxConsole.Text = "Elevator: " + console.Name + "\r\n" +
+                    "\nStatus: " + console.Status + "\r\n" +
+                    "\nLast Floor: " + console.lastFloor + "\r\n" +
+                    "\nCurrent Floor: " + console.nextFloor + "\r\n" +
+                    "\nDoorState" + console.doorState + "\r\n" +
+                    "\nOccupied: " + console.Occupied + "\r\n" +
+                    "\nWeight: " + console.currentCapacity + "\r\n";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -73,8 +63,8 @@ namespace Sark___Hardware_Component
 
         public void SetProgress(int progress)
         {
-            ConsoleReadout();
             pbarTimeToComplete.Value = progress;
         }
     }
 }
+ 

@@ -13,6 +13,10 @@ namespace Sark___Hardware_Component
         internal delegate void SetProgressDelegate(int progress);
         internal event SetProgressDelegate SetProgress;
 
+        //Event delegate for the Console readout
+        internal delegate void ConsoleReadoutDelegate(Elevator console);
+        internal event ConsoleReadoutDelegate ConsoleReadout;
+
         Random rnd = new Random();
 
         private const int max_Capacity = 2000;
@@ -122,19 +126,20 @@ namespace Sark___Hardware_Component
             else if (currentFloor == nextfloor)
             {
                 Status = "Elevator is already on the correct floor";
+
             }
             else
             {
                 nextFloor = nextfloor;
                 DoorOpenRoutine();
                 ElevatorMove();
-                
             }
+            Timer(1);
         }
 
-        private void DoorOpenRoutine()
+        public void DoorOpenRoutine()
         {
-            if (doorState != 0)
+            if (doorState == 0)
             {
                 if (currentCapacity >= 0)
                 {
@@ -147,16 +152,19 @@ namespace Sark___Hardware_Component
                 
                 Status = "Elevator Door is opening";
                 Timer(4);
-                doorState = 2;
+                DoorState(2);
                 Status = "Elevator Door is open";
 
                 // subtract from the elevator
                 currentCapacity = -rnd.Next(50, currentCapacity);
-
-
                 //  add people to the
                 currentCapacity = +rnd.Next(50, 600);
             }
+
+        }
+
+        public void DoorCloseRoutine()
+        {
 
         }
 
@@ -229,6 +237,7 @@ namespace Sark___Hardware_Component
             int temp = interval;
             for (int i = 0; i < multiplier; i++)
             {
+                ConsoleReadout(this);
                 System.Threading.Thread.Sleep(500);
                 SetProgress(temp);
                 temp = temp + interval;
@@ -253,6 +262,7 @@ namespace Sark___Hardware_Component
             Status = "Elevator moving to " + nextFloor.ToString();
             FloorTime(currentFloor, nextFloor);
             Status = "Elevator is at floor " + nextFloor.ToString();
+            Timer(1);
             this.currentFloor = (int)nextFloor;
         }
 
