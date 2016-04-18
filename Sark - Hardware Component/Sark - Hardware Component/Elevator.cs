@@ -34,7 +34,7 @@ namespace Sark___Hardware_Component
             currentFloor = 1;
             nextFloor = null;
             lastFloor = null;
-            doorState = 0;
+            doorState = 1;
             doorClear = false;
         }
 
@@ -46,7 +46,7 @@ namespace Sark___Hardware_Component
             currentFloor = currentfloor;
             nextFloor = null;
             lastFloor = null;
-            doorState = 0;
+            doorState = 1;
             doorClear = false;
         }
 
@@ -58,7 +58,7 @@ namespace Sark___Hardware_Component
             currentFloor = 1;
             nextFloor = null;
             lastFloor = null;
-            doorState = 0;
+            doorState = 1;
             doorClear = false;
         }
 
@@ -137,35 +137,83 @@ namespace Sark___Hardware_Component
             Timer(1);
         }
 
+        private void IsOccupied()
+        {
+            if (currentCapacity >= 0)
+            {
+                Occupied = true;
+            }
+            else
+            {
+                Occupied = false;
+            }
+        }
+        
         public void DoorOpenRoutine()
         {
-            if (doorState == 0)
+            IsOccupied();
+
+            if (doorState != 0)
             {
-                if (currentCapacity >= 0)
-                {
-                    Occupied = true;
-                }
-                else
-                {
-                    Occupied = false;
-                }        
-                
                 Status = "Elevator Door is opening";
                 Timer(4);
                 DoorState(2);
                 Status = "Elevator Door is open";
 
+                if (currentCapacity < maxCapacity)
+                {
+                    int tempCap = currentCapacity - maxCapacity;
+                    currentCapacity =- (tempCap + rnd.Next(0, 600));
+                }
+
                 // subtract from the elevator
-                currentCapacity = -rnd.Next(50, currentCapacity);
+                currentCapacity =- rnd.Next(0, currentCapacity);
                 //  add people to the
-                currentCapacity = +rnd.Next(50, 600);
+                currentCapacity =+ rnd.Next(50, 600);
+
+                Timer(8);
+                DoorCloseRoutine();
             }
 
+        }
+
+        public bool DoorClearCheck()
+        {
+            int tempSensor = rnd.Next(1, 10);
+            if (tempSensor >= 9)
+            {
+                return doorClear = true;
+            }
+            else
+            {
+                return doorClear = false;
+            }
+            
         }
 
         public void DoorCloseRoutine()
         {
 
+            if (doorState != 0)
+            {
+                Status = "Elevator Door is Closing";
+                Timer(2);
+
+                if (DoorClearCheck()==true)
+                {
+                    DoorState(1);
+                    Status = "Elevator Door is Closed";
+
+                    Timer(8);
+                }
+
+                if (DoorClearCheck()==false)
+                {
+                    DoorOpenRoutine();
+                }
+
+            }
+            IsOccupied();
         }
 
         //Door State will slide from 0 - 3
