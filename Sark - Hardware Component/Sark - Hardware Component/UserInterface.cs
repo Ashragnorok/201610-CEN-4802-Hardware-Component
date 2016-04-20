@@ -54,6 +54,7 @@ namespace Sark___Hardware_Component
                     "\nDoorState" + console.doorState + "\r\n" +
                     "\nOccupied: " + console.Occupied + "\r\n" +
                     "\nWeight: " + console.currentCapacity + "\r\n";
+            tbxConsole.Update();
         }
 
         private void button1_Click(object sender, EventArgs e)
