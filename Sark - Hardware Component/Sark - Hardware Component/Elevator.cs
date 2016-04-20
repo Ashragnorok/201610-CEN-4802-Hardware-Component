@@ -157,23 +157,46 @@ namespace Sark___Hardware_Component
 
             if (doorState != 0)
             {
-                Status = "Elevator Door is opening";
-                Timer(4);
-                DoorState(2);
-                Status = "Elevator Door is open";
-
-                if (currentCapacity > maxCapacity)
+                if (doorState == 2)
                 {
-                    currentCapacity = rnd.Next(50, 600);
+                    Status = "Elevator Door is open";
+                    Timer(2);
+
+                    if (currentCapacity > maxCapacity)
+                    {
+                        currentCapacity = rnd.Next(50, 600);
+                    }
+
+                    // subtract from the elevator
+                    currentCapacity = -rnd.Next(0, currentCapacity);
+                    //  add people to the
+                    currentCapacity = +rnd.Next(50, 600);
+
+                    Timer(4);
+                    DoorCloseRoutine();
+                }
+                else
+                {
+                    Status = "Elevator Door is opening";
+                    Timer(8);
+                    DoorState(2);
+                    Status = "Elevator Door is open";
+                    Timer(2);
+
+                    if (currentCapacity > maxCapacity)
+                    {
+                        currentCapacity = rnd.Next(50, 600);
+                    }
+
+                    // subtract from the elevator
+                    currentCapacity = -rnd.Next(0, currentCapacity);
+                    //  add people to the
+                    currentCapacity = +rnd.Next(50, 600);
+
+                    Timer(4);
+                    DoorCloseRoutine();
                 }
 
-                // subtract from the elevator
-                currentCapacity =- rnd.Next(0, currentCapacity);
-                //  add people to the
-                currentCapacity =+ rnd.Next(50, 600);
-
-                Timer(4);
-                DoorCloseRoutine();
             }
 
         }
@@ -198,7 +221,7 @@ namespace Sark___Hardware_Component
             if (doorState != 0)
             {
                 Status = "Elevator Door is Closing";
-                Timer(2);
+                Timer(8);
 
                 if (DoorClearCheck()==true)
                 {
@@ -236,14 +259,14 @@ namespace Sark___Hardware_Component
 
                 case 1: // Closed
                     Status = "Door is closed.";
-                    Timer(3);
+                    Timer(4);
                     
                     doorState = State;
                     break;
 
                 case 2: // Open
                     Status = "Door Is Open.";
-                    Timer(3);
+                    Timer(4);
                     
                     doorState = State;
                     break;
@@ -312,7 +335,7 @@ namespace Sark___Hardware_Component
             FloorTime(currentFloor, nextFloor);
             Status = "Elevator is at floor " + nextFloor.ToString();
             Timer(4);
-            DoorOpenRoutine();
+            DoorState(2);
             this.currentFloor = (int)nextFloor;
             Status = "Elevator is Waiting at floor " + nextFloor.ToString();
         }
